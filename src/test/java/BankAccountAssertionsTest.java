@@ -36,5 +36,12 @@ public class BankAccountAssertionsTest {
         Assertions.assertTrue(bankAccount.isActive());
     }
 
+    @Test
+    @DisplayName("Test Holder Name")
+    public void testHolderName(){
+     BankAccount bankAccount = new BankAccount(500, 0);
+     bankAccount.setHolderName("Mide");
+     Assertions.assertNotNull(bankAccount.getHolderName());
+    }
 }
 
