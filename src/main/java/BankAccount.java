@@ -52,6 +52,12 @@ public class BankAccount {
     }
 
     public double deposit(double amount){
+      /**  try {
+            Thread.sleep(5);
+        }catch (InterruptedException e){
+            e.printStackTrace();
+        }**/
+
         return balance += amount;
     }
 }

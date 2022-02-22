@@ -2,6 +2,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.time.Duration;
+
 @DisplayName("Test Bank Account Class")
 public class BankAccountAssertionsTest {
 
@@ -42,6 +44,27 @@ public class BankAccountAssertionsTest {
      BankAccount bankAccount = new BankAccount(500, 0);
      bankAccount.setHolderName("Mide");
      Assertions.assertNotNull(bankAccount.getHolderName());
+    }
+
+    @Test
+    @DisplayName("Test that we can't withdraw below minimum")
+    public void testNoWithdrawBelowMinimum(){
+        BankAccount bankAccount = new BankAccount(500, -1000);
+        Assertions.assertThrows(RuntimeException.class, () -> bankAccount.withdraw(2000));
+    }
+
+    @Test
+    @DisplayName("Test No Exceptions For withdraw and deposit")
+    public void testWithdrawAndDepositWithoutExcceptions(){
+        BankAccount bankAccount = new BankAccount(500, -1000);
+        Assertions.assertAll(() -> bankAccount.deposit(200), () -> bankAccount.withdraw(450));
+    }
+
+    @Test
+    @DisplayName("Test Speed of method")
+    public void testDepositTime(){
+        BankAccount bankAccount = new BankAccount(400, 0);
+        Assertions.assertTimeout(Duration.ofNanos(10), () -> bankAccount.deposit(200));
     }
 }
 
